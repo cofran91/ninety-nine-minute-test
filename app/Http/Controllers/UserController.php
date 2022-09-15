@@ -46,7 +46,7 @@ class UserController extends Controller
 
         if( $validate->fails() ){
 
-            $errors = $validate->errors()->all();
+            $errors = $validate->errors();
             
             return response()->json([
                 "success" => false,
@@ -115,7 +115,7 @@ class UserController extends Controller
 
         if( $validate->fails() ){
 
-            $errors = $validate->errors()->all();
+            $errors = $validate->errors();
 
             return response()->json([
                 "success" => false,
@@ -199,7 +199,7 @@ class UserController extends Controller
                 DB::rollback();
 
                 $validate->errors()->add( 'Ocurrio un error', "Dato incorrecto" );
-                $errors = $validate->errors()->all();
+                $errors = $validate->errors();
 
                 return response()->json([
                     "success" => false,
