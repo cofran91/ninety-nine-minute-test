@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 
-Route::group(['middleware' => ['jwt.auth'], 'prefix' => 'users'], function (){
+Route::group(['middleware' => ['jwt.auth', 'adminVerify'], 'prefix' => 'users'], function (){
     Route::get('/', [UserController::class, 'index']);
     Route::post('create', [UserController::class, 'save']);
     Route::put('update/{id}', [UserController::class, 'update']);
