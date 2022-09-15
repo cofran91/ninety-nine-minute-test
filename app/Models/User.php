@@ -26,6 +26,10 @@ class User extends Model
         'password',
     ];
 
+    public function setPasswordAttribute($password) {
+        $this->attributes['password'] = app('hash')->make($password);
+    }
+
     public function rol()
     {
         return $this->belongsTo( Rol::class );
