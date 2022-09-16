@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Order;
 use App\Models\Rol;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -55,5 +56,10 @@ class User extends Authenticatable implements JWTSubject
     public function rol()
     {
         return $this->belongsTo( Rol::class );
+    }
+
+    public function orders()
+    {
+        return $this->hasMany( Order::class );
     }
 }

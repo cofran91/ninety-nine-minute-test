@@ -12,6 +12,8 @@ class Address extends Model
 
     protected $fillable = [
         'id',
+        'latitude',
+        'longitude',
         'city',
         'road_type',
         'road_name',
