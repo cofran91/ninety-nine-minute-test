@@ -68,7 +68,7 @@ class UserController extends Controller
                     return response()->json([
                         "success" => true,
                         "message" => "Usuario creado con exito",
-                        "data" => $userNew->with('rol'),
+                        "data" => $userNew->load('rol'),
                     ], 200 ); 
                 }
                 else{

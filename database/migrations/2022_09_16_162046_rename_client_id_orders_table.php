@@ -14,7 +14,7 @@ class RenameClientIdOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropForeign('order_client_id_foreign');
+            $table->dropForeign('orders_client_id_foreign');
             $table->renameColumn('client_id', 'user_id');
             $table->foreign('user_id')->references('id')->on('users');
         });
@@ -28,8 +28,8 @@ class RenameClientIdOrdersTable extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign('orders_user_id_foreign');
             $table->renameColumn('user_id', 'client_id');
-            $table->dropForeign('order_user_id_foreign');
             $table->foreign('client_id')->references('id')->on('users');
 
         });
