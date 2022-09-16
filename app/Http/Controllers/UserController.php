@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users =  User::get();
+        $users =  User::with('rol')->get();
 
         return response()->json([
             "success" => true,
@@ -58,16 +58,17 @@ class UserController extends Controller
             try{
                 DB::beginTransaction();
 
-                $userNew = new user;
+                $userNew = new User;
+                $userNew = $userNew->create( $request->all() );
 
-                if( $userNew->create( $request->all() )){
+                if( $userNew ){
 
                     DB::commit();
 
                     return response()->json([
                         "success" => true,
                         "message" => "Usuario creado con exito",
-                        "data" => $userNew,
+                        "data" => $userNew->with('rol'),
                     ], 200 ); 
                 }
                 else{
@@ -136,7 +137,7 @@ class UserController extends Controller
                     ], 404 );
                 }
 
-                if( $userUpdate->update( $request->all() )){
+                if( $userUpdate->update( $request->all() ) ){
 
                     DB::commit();
 

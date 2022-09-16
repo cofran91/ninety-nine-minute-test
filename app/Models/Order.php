@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\Address;
+use App\Models\User;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,18 +15,15 @@ class Order extends Model
      protected $fillable = [
         'id',
         'status_id',
-        'client_id',
-        'product_weight',
-        'product_weight',
+        'user_id',
+        'origin_address_id',
         'arrival_address_id',
         'product_amount',
+        'product_weight',
         'value',
+        'devolution',
         'created_at',
-        'updated_at',
-    ];
-
-    protected $hidden = [
-        'password',
+        'updated_at'
     ];
 
     public function originAddress()
@@ -35,5 +34,15 @@ class Order extends Model
     public function arrivalAddress()
     {
         return $this->belongsTo( Address::class, 'arrival_address_id', 'id' );
+    }
+
+    public function status()
+    {
+        return $this->belongsTo( Status::class );
+    }
+
+    public function user()
+    {
+        return $this->belongsTo( User::class );
     }
 }
