@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\RolSeeder;
+use Database\Seeders\StatusSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            RolSeeder::class,
+            StatusSeeder::class
+        ]);
     }
 }
